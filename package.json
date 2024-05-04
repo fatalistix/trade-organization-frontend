@@ -1,0 +1,28 @@
+{
+  "name": "trade-organization-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@improbable-eng/grpc-web": "^0.15.0",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
+    "pinia": "^2.1.7",
+    "sass": "^1.76.0",
+    "trade-organization-proto": "fatalistix/trade-organization-proto#v0.0.15",
+    "vue": "^3.4.21",
+    "vue-router": "4",
+    "vuelidate": "^0.7.7"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vue-tsc": "^2.0.6"
+  }
+}
