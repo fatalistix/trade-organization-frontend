@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
+import { ref } from 'vue';
 import { tradingPointService } from '../services/trading_point'
 import { TradingPoint } from '../models/trading_point';
 
