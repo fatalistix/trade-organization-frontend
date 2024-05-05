@@ -18,15 +18,19 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
-            path: '/manager/trading_points/',
+            path: '/manager/trading-points/',
             component: TradingPointList
+        },
+        {
+            path: '/manager/trading-points/register',
+            component: TradingPointRegister
         },
         {
             path: '/staff',
             component: SellerRegister
         },
         {
-            path: '/trading_point/:trading_point_id/:trading_point_type/sellers',
+            path: '/trading-point/:trading_point_id/:trading_point_type/sellers',
             component: SellerList
         },
     ]
