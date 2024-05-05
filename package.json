@@ -13,6 +13,7 @@
     "@improbable-eng/grpc-web": "^0.15.0",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
+    "bulma": "^1.0.0",
     "pinia": "^2.1.7",
     "sass": "^1.76.0",
     "trade-organization-proto": "fatalistix/trade-organization-proto#v0.0.15",
