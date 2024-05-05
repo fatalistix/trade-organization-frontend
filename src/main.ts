@@ -9,8 +9,7 @@ import TradingPointList from './components/TradingPointList.vue'
 
 import App from './App.vue'
 
-// import './app.scss'
-import './style.css'
+import './app.scss'
 
 const pinia = createPinia()
 const app = createApp(App)
