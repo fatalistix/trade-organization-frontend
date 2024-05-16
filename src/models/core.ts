@@ -1,3 +1,5 @@
+import { Try, tryF } from "ts-try"
+
 export class Money {
     private readonly _rubles: number = 0
     private readonly _pennies: number = 0
@@ -7,20 +9,14 @@ export class Money {
         this._pennies = pennies
     }
 
-    public static from(rubles: number, pennies: number): Promise<Money> {
+    public static from(rubles: number, pennies: number): Try<Money> {
         if (!this.areValidRubles(rubles)) {
-            return new Promise((_, reject) => {
-                reject("rubles must be >= 0")
-            })
+            return tryF(() => new Error("rubles must be >= 0"))
         }
         if (!this.areValidPennies(pennies)) {
-            return new Promise((_, reject) => {
-                reject("pennies must be >= 0 and <= 99")
-            })
+            return tryF(() => new Error("pennies must be >= 0 and <= 99"))
         }
-        return new Promise((resolve) => {
-            resolve(new Money(rubles, pennies))
-        })
+        return tryF(() => new Money(rubles, pennies))
     }
 
     public get rubles(): number {
