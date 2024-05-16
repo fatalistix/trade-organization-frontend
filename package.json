@@ -19,6 +19,7 @@
     "pinia": "^2.1.7",
     "sass": "^1.76.0",
     "trade-organization-proto": "fatalistix/trade-organization-proto#v0.0.16",
+    "ts-try": "^0.2.0",
     "vue": "^3.4.21",
     "vue-router": "4",
     "vuelidate": "^0.7.7"
