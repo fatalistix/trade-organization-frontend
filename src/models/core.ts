@@ -1,12 +1,26 @@
 export class Money {
-    private _rubles: number = 0
-    private _pennies: number = 0
+    private readonly _rubles: number = 0
+    private readonly _pennies: number = 0
 
-    public constructor(rubles: number, pennies: number) {
-        this.validateRubles(rubles)
-        this.validatePennies(pennies)
+    private constructor(rubles: number, pennies: number) {
         this._rubles = rubles
         this._pennies = pennies
+    }
+
+    public static from(rubles: number, pennies: number): Promise<Money> {
+        if (!this.areValidRubles(rubles)) {
+            return new Promise((_, reject) => {
+                reject("rubles must be >= 0")
+            })
+        }
+        if (!this.areValidPennies(pennies)) {
+            return new Promise((_, reject) => {
+                reject("pennies must be >= 0 and <= 99")
+            })
+        }
+        return new Promise((resolve) => {
+            resolve(new Money(rubles, pennies))
+        })
     }
 
     public get rubles(): number {
@@ -17,25 +31,17 @@ export class Money {
         return this._pennies
     }
 
-    public set rubles(rubles: number) {
-        this.validateRubles(rubles)
-        this._rubles = rubles
-    }
-
-    public set pennies(pennies: number) {
-        this.validatePennies(pennies)
-        this._pennies = pennies
-    }
-
-    private validateRubles(rubles: number) {
+    private static areValidRubles(rubles: number): boolean {
         if (rubles < 0) {
-            throw new Error("Invalid rubles value")
+            return false
         }
+        return true
     }
 
-    private validatePennies(pennies: number) {
+    private static areValidPennies(pennies: number) {
         if (pennies < 0 || 99 < pennies) {
-            throw new Error("Invalid pennies value")
+            return false
         }
+        return true
     }
 }
