@@ -5,14 +5,14 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 function managerLogin() {
-    router.replace("/manager")
+    router.push("/manager")
 }
 
 const tradingPointId = ref(0)
 const tradingPointType = ref("")
 
 const sellerLogin = () => {
-    router.replace("/trading-point/" + tradingPointId.value + "/" + tradingPointType.value + "/sellers")
+    router.push("/trading-point/" + tradingPointId.value + "/" + tradingPointType.value + "/sellers")
 }
 
 </script>
