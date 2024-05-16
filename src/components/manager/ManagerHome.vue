@@ -6,7 +6,7 @@
         Добро пожаловать на страницу менеджера!
     </h2>
     <div class="box">
-        <RouterLink to="/manager/trading-point" class="button is-primary is-fullwidth">Перейти к торговым точкам
+        <RouterLink to="/manager/trading-point" class="button is-large is-primary is-fullwidth">Перейти к торговым точкам
         </RouterLink>
     </div>
 </template>
