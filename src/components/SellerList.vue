@@ -2,9 +2,8 @@
 import { ref } from 'vue'
 import { sellerService } from '../services/seller';
 import { useRoute } from 'vue-router';
-import { PlaceOfWorkType, tradingPointTypeFromString } from '../models/trading_point';
+import { tradingPointTypeFromString } from '../models/trading_point';
 import { Seller } from '../models/seller';
-import { Money } from '../models/core';
 
 const sellers = ref<Seller[]>([])
 
