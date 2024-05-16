@@ -1,13 +1,12 @@
 import { TradingPointServiceClient } from "trade-organization-proto/gen/ts/tradingpoint/Trading_pointServiceClientPb"
-import { RegisterRequest, RegisterResponse, TradingPointType as ProtoType, ListResponse } from "trade-organization-proto/gen/ts/tradingpoint/trading_point_pb"
+import { RegisterRequest, RegisterResponse, ListResponse } from "trade-organization-proto/gen/ts/tradingpoint/trading_point_pb"
 import { TradingPointType as ModelType } from "../models/trading_point"
 import { Money as ModelMoney } from "../models/core"
 import * as grpc from 'grpc-web'
 import { BACKEND_URL } from "../config/config"
 import { modelMoneyToProtoMoney, modelTradingPointTypeToProtoTradingPointType, protoMoneyToModelMoney, protoTradingPointTypeToModelTradingPointType } from "./converters"
 import { TradingPoint as ModelTradingPoint } from "../models/trading_point"
-import { TradingPoint as ProtoTradingPoint } from "trade-organization-proto/gen/ts/tradingpoint/trading_point_pb"
-import { Empty } from "trade-organization-proto/gen/ts/core/empty_pb"
+import { Empty } from 'google-protobuf/google/protobuf/empty_pb'
 import { Money as ProtoMoney } from "trade-organization-proto/gen/ts/core/money_pb"
 
 export class TradingPointService {
@@ -60,5 +59,3 @@ export class TradingPointService {
         })
     }
 }
-
-export const tradingPointService = new TradingPointService()
