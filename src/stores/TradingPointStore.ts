@@ -42,12 +42,12 @@ export const useTradingPointStore = defineStore('TradingPointStore', {
                 ).then(
                     _ => {
                         resolve()
+                        this.updateList()
                     },
                     e => {
                         reject(e)
                     }
                 )
-                this.updateList()
             })
         }
     }
