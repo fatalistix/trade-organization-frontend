@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { notify } from '@kyvg/vue3-notification';
+import { useNotification } from '@kyvg/vue3-notification';
 import { useTradingPointStore } from '../../stores/TradingPointStore';
 
 const store = useTradingPointStore()
+const notification = useNotification()
+
 store.updateList().then(
   _ => {},
   _ => {
-    notify({
+    notification.notify({
       text: "Не удалось получить список торговых точек",
       type: "warn"
     })
