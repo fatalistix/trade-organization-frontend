@@ -38,7 +38,10 @@ const rules = {
     }
 }
 
-const v = useVuelidate(rules, { type, areaPlot, rentalCharge, counterCount, address })
+const v = useVuelidate(
+    rules, 
+    { type, areaPlot, rentalCharge, counterCount, address },
+)
 
 function register () {
     // tradingPointService.register(
