@@ -6,7 +6,7 @@ import Navbar from './components/Navbar.vue';
 <template>
   <Navbar />
   <RouterView />
-  <Notifications />
+  <Notifications position="top center" width="100%"/>
 </template>
 
 <style scoped>
