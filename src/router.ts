@@ -4,6 +4,7 @@ import { useUserStore, UserType } from "./stores/UserStore"
 import Login from "./components/login/Login.vue"
 import ManagerHome from "./components/manager/ManagerHome.vue"
 import ManagerTradingPoint from "./components/manager/ManagerTradingPoint.vue"
+import ManagerSeller from "./components/manager/ManagerSeller.vue"
 import NotFound from "./components/NotFound.vue"
 
 export const router = createRouter({
@@ -24,6 +25,10 @@ export const router = createRouter({
         {
             path: '/manager/trading-point',
             component: ManagerTradingPoint
+        },
+        {
+            path: '/manager/seller',
+            component: ManagerSeller,
         },
         {
             path: '/:pathMatch(.*)*',
