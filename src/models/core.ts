@@ -1,4 +1,4 @@
-import { Try, tryF } from "ts-try"
+import { Try } from "ts-try"
 
 export class Money {
     private readonly _rubles: number = 0
@@ -11,12 +11,19 @@ export class Money {
 
     public static from(rubles: number, pennies: number): Try<Money> {
         if (!this.areValidRubles(rubles)) {
-            return tryF(() => new Error("rubles must be >= 0"))
+            return new Error("rubles must be >= 0")
         }
         if (!this.areValidPennies(pennies)) {
-            return tryF(() => new Error("pennies must be >= 0 and <= 99"))
+            return new Error("pennies must be >= 0 and <= 99")
         }
-        return tryF(() => new Money(rubles, pennies))
+        return new Money(rubles, pennies)
+    }
+
+    public static fromString(s: string): Try<Money> {
+        const value = +s
+        const rubles = Math.trunc(value)
+        const pennies = Math.round((value - rubles) * 100)
+        return this.from(rubles, pennies)
     }
 
     public get rubles(): number {
@@ -39,5 +46,9 @@ export class Money {
             return false
         }
         return true
+    }
+
+    public toString(): string {
+        return `${this._rubles}.${this._pennies}`
     }
 }
