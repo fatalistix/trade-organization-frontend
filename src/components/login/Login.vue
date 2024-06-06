@@ -1,18 +1,27 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useRouter } from 'vue-router'
+import { useTradingPointStore } from '../../stores/TradingPointStore';
+import { useNotification } from '@kyvg/vue3-notification';
+import TradingPointList from '../trading_point/TradingPointList.vue';
 
 const router = useRouter()
+const notification = useNotification()
+
+const tradingPointStore = useTradingPointStore()
+
+tradingPointStore.updateTradingPoints().then(
+    _ => { },
+    _ => {
+        notification.notify({
+            text: "Не удалось получить список торговых точек",
+            type: "warn"
+        })
+    }
+)
+
 
 function managerLogin() {
     router.push("/manager")
-}
-
-const tradingPointId = ref(0)
-const tradingPointType = ref("")
-
-const sellerLogin = () => {
-    router.push("/trading-point/" + tradingPointId.value + "/" + tradingPointType.value + "/sellers")
 }
 
 </script>
@@ -33,19 +42,8 @@ const sellerLogin = () => {
             </div>
             <div class="box">
                 <div class="field">
-                    <label class="label">Если вы не менеджер, то введите идентификатор торговой точки</label>
-                    <div class="control">
-                        <input class="input is-rounded is-large" type="text" placeholder="id" v-model="tradingPointId"/>
-                    </div>
-                    <div class="select is-rounded is-large is-fullwidth">
-                        <select v-model="tradingPointType">
-                            <option value="department_store">Универмаг</option>
-                            <option value="store">Магазин</option>
-                            <option value="tray">Лоток</option>
-                            <option value="kiosk">Киоск</option>
-                        </select>
-                    </div>
-                    <button @click="sellerLogin" class="button is-primary is-rounded is-fullwidth">Вход</button>
+                    <label class="label">Если вы продавец, выберите вашу торговую точку</label>
+                    <TradingPointList base-url="/trading-point" />
                 </div>
             </div>
         </div>
