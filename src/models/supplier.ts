@@ -4,6 +4,7 @@ export interface Supplier {
     id: number
     name: string
     type: SupplierType
+    products: ProductSupplier[]
 }
 
 export enum SupplierType {
@@ -12,7 +13,6 @@ export enum SupplierType {
 }
 
 export interface ProductSupplier {
-    id: number
     price: Money
     productId: number
 }
