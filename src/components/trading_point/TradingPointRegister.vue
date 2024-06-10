@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { required, numeric } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
-import { tradingPointTypeFromString } from '../../models/trading_point'
+import { TradingPointType } from '../../models/trading_point'
 import { Money } from '../../models/core'
 import { useTradingPointStore } from '../../stores/TradingPointStore'
 import { useNotification } from '@kyvg/vue3-notification'
@@ -66,8 +66,8 @@ function register() {
         return
     }
 
-    tradingPointStore.register(
-        tradingPointTypeFromString(type.value),
+    tradingPointStore.create(
+        TradingPointType.fromString(type.value) as TradingPointType,
         areaPlot.value,
         rentalCharge,
         counterCount.value,

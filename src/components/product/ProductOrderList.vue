@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { useApplicationCreateStore } from '../../stores/ApplicationCreateStore';
+import { useProductOrderStore } from '../../stores/ProductOrderStore';
 
-const applicationCreateStore = useApplicationCreateStore()
+const productOrderStore = useProductOrderStore()
 
 </script>
 
 <template>
-    <article class="media" v-for="product in applicationCreateStore.products">
+    <article class="media" v-for="product in productOrderStore.products">
         <div class="media-content">
             <slot :id="product.productId"></slot>
         </div>
     </article>
-    <article class="media" v-if="applicationCreateStore.products.length === 0">
+    <article class="media" v-if="productOrderStore.products.length === 0">
         <div class="media-content has-text-centered">
             Продукты не выбраны
         </div>

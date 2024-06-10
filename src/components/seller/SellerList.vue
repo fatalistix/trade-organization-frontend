@@ -6,31 +6,16 @@ const sellerStore = useSellerStore()
 </script>
 
 <template>
-    <div class="box">
-        <article class="panel is-info">
-            <p class="panel-heading has-text-centered">Список продавцов</p>
-            <p class="panel-tabs">
-                <a>Все</a>
-                <a>Работающие здесь</a>
-                <a>Нигде не работающие</a>
-            </p>
-            <div class="panel-block">
-                <p class="control has-icons-left">
-                    <input class="input" type="text" placeholder="Поиск">
-                    <span class="icon is-left">
-                        <SearchOutlined />
-                    </span>
-                </p>
-            </div>
-        </article>
-        <aside class="menu">
-            <ul class="menu-list">
-                <li v-for="seller in sellerStore.sellers">
-                    <slot :id="seller.id"></slot>
-                </li>
-            </ul>
-        </aside>
-    </div>
+    <article class="media" v-for="seller in sellerStore.sellers">
+        <div class="media-content">
+            <slot :id=seller.id></slot>
+        </div>
+    </article>
+    <article class="media" v-if="sellerStore.sellers.length === 0">
+        <div class="media-content has-text-centered">
+            Тут пока пусто
+        </div>
+    </article>
 </template>
 
 <style scoped></style>

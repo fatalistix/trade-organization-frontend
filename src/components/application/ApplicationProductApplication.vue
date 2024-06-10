@@ -1,36 +1,32 @@
 <script setup lang="ts">
 import { useNotification } from '@kyvg/vue3-notification';
-import { useApplicationCreateStore } from '../../stores/ApplicationCreateStore';
-import { computed } from 'vue';
 import { useProductStore } from '../../stores/ProductStore';
+import { useProductApplicationStore } from '../../stores/ProductApplicationStore';
+import { computed } from 'vue';
 
 const notification = useNotification()
 
-const applicationCreateStore = useApplicationCreateStore()
 const productStore = useProductStore()
+const productApplicationStore = useProductApplicationStore()
 
 const props = defineProps<{
     id: number
 }>()
 
+const product = productStore.getById(props.id)!!
+
 const quantity = computed({
     get() {
-        const value = applicationCreateStore.products.find(pa => pa.productId === props.id)!!
+        const value = productApplicationStore.getByProductId(props.id)!!
         return value.quantity
     },
     set(newQuantity: number) {
-        applicationCreateStore.products.forEach(p => {
-            if (p.productId === props.id) {
-                p.quantity = newQuantity
-            }
-        })
+        productApplicationStore.updateQuantity(props.id, newQuantity)
     }
 })
 
-const product = productStore.getById(props.id)!!
-
 function remove() {
-    applicationCreateStore.remove(props.id)
+    productApplicationStore.remove(props.id)
 
     notification.notify({
         text: "Продукт удален из заявки",
@@ -48,10 +44,12 @@ function remove() {
             </label>
         </div>
         <div class="column">
-            <input class="input" type="number" v-model="quantity" />
+            <div class="control">
+                <input type="number" class="input is-small" v-model="quantity">
+            </div>
         </div>
         <div class="column">
-            <button class="button is-danger" @click="remove()">Удалить</button>
+            <button class="button is-small is-danger" @click="remove">Удалить</button>
         </div>
     </div>
 </template>

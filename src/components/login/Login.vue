@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 import { useTradingPointStore } from '../../stores/TradingPointStore';
 import { useNotification } from '@kyvg/vue3-notification';
 import TradingPointList from '../trading_point/TradingPointList.vue';
+import TradingPointPush from '../trading_point/TradingPointPush.vue';
 
 const router = useRouter()
 const notification = useNotification()
@@ -18,7 +19,6 @@ tradingPointStore.updateTradingPoints().then(
         })
     }
 )
-
 
 function managerLogin() {
     router.push("/manager")
@@ -43,7 +43,11 @@ function managerLogin() {
             <div class="box">
                 <div class="field">
                     <label class="label">Если вы продавец, выберите вашу торговую точку</label>
-                    <TradingPointList base-url="/trading-point" />
+                    <TradingPointList>
+                        <template v-for="_ in tradingPointStore.tradingPoints" #default="{ id, type }">
+                            <TradingPointPush :id ="id" :type="type" base-url="/trading-point"/>
+                        </template>
+                    </TradingPointList>
                 </div>
             </div>
         </div>

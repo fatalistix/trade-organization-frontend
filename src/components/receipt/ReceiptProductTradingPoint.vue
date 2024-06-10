@@ -1,45 +1,49 @@
 <script setup lang="ts">
 import { useNotification } from '@kyvg/vue3-notification';
 import { useProductStore } from '../../stores/ProductStore';
-import { useProductApplicationStore } from '../../stores/ProductApplicationStore';
+import { useProductReceiptStore } from '../../stores/ProductReceiptStore';
 import { computed } from 'vue';
+import { useProductTradingPointStore } from '../../stores/ProductTradingPointStore';
 
 const notification = useNotification()
 
 const productStore = useProductStore()
-const productApplicationStore = useProductApplicationStore()
+const productReceiptStore = useProductReceiptStore()
+const productTradingPointStore = useProductTradingPointStore()
 
 const props = defineProps<{
-    id: number
+    productId: number
 }>()
 
-const product = productStore.getById(props.id)!!
+const product = productStore.getById(props.productId)!!
+const productTradingPoint = productTradingPointStore.getByProductId(props.productId)!!
 
 const selected = computed({
-    get: () => productApplicationStore.selected(props.id),
+    get: () => productReceiptStore.selected(props.productId),
     set: () => { }
 })
 
 function select() {
-    productApplicationStore.add({
-        productId: props.id, quantity: 1
+    productReceiptStore.add({
+        quantity: 1,
+        price: productTradingPoint.price,
+        productId: product.id
     })
 
     notification.notify({
-        text: "Продукт добавлен в заявку",
+        text: "Продукт добавлен в чек",
         type: "success"
     })
 }
 
 function unselect() {
-    productApplicationStore.remove(props.id)
+    productReceiptStore.remove(props.productId)
 
     notification.notify({
-        text: "Продукт удален из заявки",
+        text: "Продукт удален из чека",
         type: "success"
     })
 }
-
 </script>
 
 <template>
@@ -52,7 +56,7 @@ function unselect() {
         <div class="column">
             <label class="checkbox">
                 <input type="checkbox" v-bind="{ checked: selected }" @change="!selected ? select() : unselect()">
-                Добавлен в заявку
+                Добавлен в чек
             </label>
         </div>
     </div>

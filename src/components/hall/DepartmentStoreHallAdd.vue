@@ -31,9 +31,7 @@ function addHall() {
         return
     }
 
-    departmentStoreStore.addHall(
-        section.value,
-    ).then(
+    departmentStoreStore.addHall(section.value).then(
         _ => {
             notification.notify({
                 text: "Зал добавлен",
@@ -60,7 +58,7 @@ function addHall() {
             <div class="level-item">
                 <div class="select">
                     <select v-model="section">
-                        <option :value="section.id" v-for="section in departmentStoreStore.sections">Секция {{
+                        <option :value="section.id" v-for="section in departmentStoreStore.departmentStore?.sections">Секция {{
                             section.id }}
                         </option>
                     </select>

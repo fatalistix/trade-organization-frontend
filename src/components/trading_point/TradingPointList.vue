@@ -1,35 +1,32 @@
 <script setup lang="ts">
-import { useNotification } from '@kyvg/vue3-notification';
 import { useTradingPointStore } from '../../stores/TradingPointStore';
+import { SearchOutlined } from '@ant-design/icons-vue';
 
-const store = useTradingPointStore()
-const notification = useNotification()
-
-store.updateList().then(
-  _ => {},
-  _ => {
-    notification.notify({
-      text: "Не удалось получить список торговых точек",
-      type: "warn"
-    })
-  }
-)
+const tradingPointStore = useTradingPointStore()
 
 </script>
 
 <template>
-  <h2 class="title is-2 has-text-centered">
-    Список торговых точек
-  </h2>
-  <div class="box">
-    <ul>
-      <li v-for="tradingPoint in store.tradingPointList" :key="tradingPoint.id">
-        {{ tradingPoint.id+" "+tradingPoint.type+" "+tradingPoint.address }}
-      </li>
-    </ul>
-  </div>
+  <article class="panel is-info">
+    <p class="panel-heading has-text-centered">Список торговых точек</p>
+    <p class="panel-tabs">
+      <a>Все</a>
+      <a>Универмаги</a>
+      <a>Магазины</a>
+      <a>Лотки</a>
+      <a>Киоски</a>
+    </p>
+    <div class="panel-block">
+      <p class="control has-icons-left">
+        <input class="input" type="text" placeholder="Поиск">
+        <span class="icon is-left">
+          <SearchOutlined />
+        </span>
+      </p>
+    </div>
+    <slot v-for="tradingPoint in tradingPointStore.tradingPoints" :key="tradingPoint.id" :id="tradingPoint.id"
+      :type="tradingPoint.type"></slot>
+  </article>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
