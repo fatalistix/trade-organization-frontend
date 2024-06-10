@@ -4,7 +4,9 @@ export interface Application {
     id: number
     tradingPointId: number
     tradingPointType: TradingPointType
-    createdAt: Date
+    createdAt: Date,
+    orderId: number | null
+    products: ProductApplication[]
 }
 
 export interface ProductApplication {
